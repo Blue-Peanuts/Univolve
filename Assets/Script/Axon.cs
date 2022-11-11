@@ -2,16 +2,18 @@ using System.Collections.Generic;
 
 public class Axon
 {
-    private Neuron _output;
-    private float _resistence;
+    const float I_MULTIPLIER = 200;
 
-    public Axon(Neuron output, float resistence)
+    private Neuron _output;
+    private float _weight;
+
+    public Axon(Neuron output, float weight)
     {
         _output = output;
-        _resistence = resistence;
+        _weight = weight;
     }
-    public void Transfer()
+    public void Signal()
     {
-
+        _output.Charge(I_MULTIPLIER * _weight);
     }
 }
