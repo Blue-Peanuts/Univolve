@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
-public class Neuron
+
+public class Neuron : ITick
 {
     const float A = 0.02f, B = 0.2f, C = -65, D = 2;
     const float VT = 30;
@@ -18,7 +18,7 @@ public class Neuron
     {
         _axons = axons;
     }
-    private void Update(float deltaTime)
+    public void Tick(float deltaTime)
     {
         _v += GetDeltaV(deltaTime);
         _u += GetDeltaU(deltaTime);
@@ -38,8 +38,6 @@ public class Neuron
     private void Spike()
     {
         foreach (Axon axon in _axons)
-        {
-            axon.Signal();
-        }
+            axon.Stimulate();
     }
 }
