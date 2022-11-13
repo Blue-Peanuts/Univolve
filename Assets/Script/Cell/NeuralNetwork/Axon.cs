@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 public class Axon : ITick
 {
-    const float I_MULTIPLIER = 200;
+    private const float Multiplier = 200;
 
-    private Neuron _output;
-    private float _weight;
+    private readonly Neuron _output;
+    private readonly float _weight;
 
     private bool _stimulated = false;
 
@@ -17,7 +17,7 @@ public class Axon : ITick
     public void Tick(float deltaTime)
     {
         if (_stimulated)
-            _output.Charge(I_MULTIPLIER * _weight);
+            _output.Charge(Multiplier * _weight);
     }
     public void Stimulate()
     {
