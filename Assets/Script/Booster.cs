@@ -13,4 +13,8 @@ public class Booster : Organ
     {
         
     }
+
+    public Booster(Vector3 organPosition) : base(organPosition)
+    {
+    }
 }

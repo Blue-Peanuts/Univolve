@@ -10,11 +10,11 @@ public enum FieldDna {
 
 public class Genes
 {
-    private readonly List<(Guid, OrganType)> _neuronsDna;
+    private readonly List<(Guid, OrganType, Vector3)> _neuronsDna;
     private readonly List<(Guid, Guid, float)> _axonsDna;
     private readonly Dictionary<FieldDna, float> _fieldsDna;
 
-    public Genes(List<(Guid, OrganType)> neuronsDna, List<(Guid, Guid, float)> axonsDna,
+    public Genes(List<(Guid, OrganType, Vector3)> neuronsDna, List<(Guid, Guid, float)> axonsDna,
         Dictionary<FieldDna, float> fieldsDna)
     {
         _neuronsDna = neuronsDna;
@@ -27,10 +27,10 @@ public class Genes
         var neurons = new List<Neuron>();
         var axons = new List<Axon>();
         var neuronIdPair = new Dictionary<Guid, Neuron>();
-        foreach (var (neuronId, organType) in _neuronsDna)
+        foreach (var (neuronId, organType, organPosition) in _neuronsDna)
         {
             var neuron = new Neuron();
-            neuron.AssignOrgan(Organ.CreateOrgan(organType));
+            neuron.AssignOrgan(Organ.CreateOrgan(organType, organPosition));
             neurons.Add(neuron);
             neuronIdPair[neuronId] = neuron;
         }
