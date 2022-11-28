@@ -1,31 +1,42 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+
+public enum FieldDna {
+    MutationChance, Size
+}
 
 public class Genes
 {
-    private List<Guid> _neuronsDna;
-    private List<(Guid, Guid, float)> _axonsDna;
+    private readonly List<(Guid, OrganType)> _neuronsDna;
+    private readonly List<(Guid, Guid, float)> _axonsDna;
+    private readonly Dictionary<FieldDna, float> _fieldsDna;
 
+    public Genes(List<(Guid, OrganType)> neuronsDna, List<(Guid, Guid, float)> axonsDna,
+        Dictionary<FieldDna, float> fieldsDna)
+    {
+        _neuronsDna = neuronsDna;
+        _axonsDna = axonsDna;
+        _fieldsDna = fieldsDna;
+    }
+    
     public NeuralNetwork BuildNeuralNetwork()
     {
-        List<Neuron> neurons = new List<Neuron>();
-        List<Axon> axons = new List<Axon>();
-        Dictionary<Guid, Neuron> neuronIdPair = new Dictionary<Guid, Neuron>();
-        foreach (var neuronId in _neuronsDna)
+        var neurons = new List<Neuron>();
+        var axons = new List<Axon>();
+        var neuronIdPair = new Dictionary<Guid, Neuron>();
+        foreach (var (neuronId, organType) in _neuronsDna)
         {
-            Neuron neuron = new Neuron();
+            var neuron = new Neuron();
+            neuron.AssignOrgan(Organ.CreateOrgan(organType));
             neurons.Add(neuron);
             neuronIdPair[neuronId] = neuron;
         }
-        foreach (var axonDna in _axonsDna)
+        foreach (var (from, to, weight) in _axonsDna)
         {
-            Guid from = axonDna.Item1;
-            Guid to = axonDna.Item2;
-            float weight = axonDna.Item3;
-            
-            Axon axon = new Axon(neuronIdPair[to], weight);
+            var axon = new Axon(neuronIdPair[to], weight);
             axons.Add(axon);
             neuronIdPair[from].AddAxon(axon);
         }

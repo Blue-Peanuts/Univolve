@@ -10,7 +10,22 @@ public class NeuralNetwork : ITick
         _neurons = neurons;
         _axons = axons;
     }
+
+
+    public List<Organ> GetOrgans()
+    {
+        var organs = new List<Organ>();
+
+        foreach (var neuron in _neurons)
+        {
+            if(neuron.GetOrgan() != null)
+                organs.Add((Organ)neuron.GetOrgan());
+        }
+
+        return organs;
+    }
     
+
     public void Tick(float deltaTime)
     {
         foreach (var neuron in _neurons)
