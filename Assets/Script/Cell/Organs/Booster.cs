@@ -11,7 +11,7 @@ public class Booster : Organ
 
     public override void Output()
     {
-        
+        //Cell.GameObject.transform.position = 
     }
 
     public Booster(Vector3 organPosition) : base(organPosition)

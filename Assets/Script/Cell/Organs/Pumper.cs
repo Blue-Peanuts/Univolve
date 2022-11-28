@@ -10,11 +10,10 @@ public class Pumper : Organ
 
     public override float Input()
     {
-        throw new System.NotImplementedException();
+        return 100;
     }
 
     public override void Output()
     {
-        throw new System.NotImplementedException();
     }
 }

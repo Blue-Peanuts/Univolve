@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum OrganType
 {
-    Booster
+    Booster, Pumper
 }
 
 public abstract class Organ
@@ -25,7 +25,8 @@ public abstract class Organ
     {
         Dictionary<OrganType, Organ> organs = new Dictionary<OrganType, Organ>
         {
-            [OrganType.Booster] = new Booster(organPosition)
+            [OrganType.Booster] = new Booster(organPosition),
+            [OrganType.Pumper] = new Pumper(organPosition),
         };
 
         return organs[organType];
