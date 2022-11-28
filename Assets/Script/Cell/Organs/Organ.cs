@@ -18,7 +18,7 @@ public abstract class Organ
 
     public Organ(Vector3 organPosition)
     {
-        organPosition = OrganPosition;
+        OrganPosition = organPosition;
     }
     
     public static Organ CreateOrgan(OrganType organType, Vector3 organPosition)
